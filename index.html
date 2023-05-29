@@ -22,12 +22,11 @@
         <input class="input" type="text" id="usuario" placeholder=Usuario>
         <input class="input" type="password" id="clave" placeholder=Contraseña>
         <p>Olvidaste tu contraseña? <span class="span">Click aqui!</span></p>
-        <button class="btn">Iniciar Sesión</button>
+        <button type="button"class="btn" id="log">Iniciar Sesión</button>
       </form>
     </div>
     <img class="image-container" src="./images/login-imagen.svg" alt="img-login">
   </div>
-<!--
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const btlogin = document.querySelector("#log");
@@ -46,8 +45,9 @@
         })
           .then(respuesta => respuesta.json())
           .then(datos => {
+            console.log(datos);
             if(datos.acceso){
-              window.location.href ="./views/lista.participantes.html" ;
+              window.location.href ="./views/index1.html" ;
             }else{
               alert("Error");
             }
@@ -55,8 +55,8 @@
       }
       btlogin.addEventListener("click", logIn);
     })
-  -->
-  <!-- </script> -->
+  
+  </script>
 </body>
 
 </html>

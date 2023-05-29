@@ -50,6 +50,8 @@ CREATE TABLE usuarios
 INSERT INTO usuarios(idpersona, usuario, clave) VALUES 
 	(1,'irene31', '76364010');
 
+UPDATE usuarios SET clave = "$2y$10$XAuSPSjRRCQRvdpMDbvMz.tA8U3jo7XF3IF1vuGYITv/ROFj9g0Kq" WHERE idusuario = 1;
+UPDATE usuarios SET clave = '$2y$10$6l64SgQiLw/JChl5/LZLpunseifu/zLQYgYUeNkW.JGDgrleyAiwu' WHERE idusuario = 2;
 SELECT * FROM usuarios;
 
 -- COMISARIOS
