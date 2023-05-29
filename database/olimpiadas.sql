@@ -8,12 +8,12 @@ CREATE TABLE personas
 	idpersona		INT AUTO_INCREMENT PRIMARY KEY,
 	apellidos		VARCHAR(50) 	NOT NULL,
 	nombres			VARCHAR(50) 	NOT NULL,
-	dni			CHAR(8)		NOT NULL,
-	fechanac		DATE 		NOT NULL,
+	dni				CHAR(8)			NOT NULL,
+	fechanac			DATE 				NOT NULL,
 	direccion 		VARCHAR(100) 	NULL,
-	telefono		CHAR(9) 	NOT NULL,
+	telefono			CHAR(9) 			NULL,
 	correo			VARCHAR(100) 	NOT NULL,
-	estado			CHAR(1) 	NOT NULL DEFAULT '1',
+	estado			CHAR(1) 			NOT NULL DEFAULT '1',
 	CONSTRAINT uk_dni_correo_per UNIQUE (dni, correo)
 )ENGINE = INNODB;
 
@@ -39,16 +39,16 @@ SELECT * FROM personas;
 CREATE TABLE usuarios
 (
 	idusuario		INT AUTO_INCREMENT PRIMARY KEY,
-	idpersona		INT 		NOT NULL,
+	idpersona		INT 				NOT NULL,
 	usuario			VARCHAR(50) 	NOT NULL,
-	clave			VARCHAR(200) 	NOT NULL,
+	clave				VARCHAR(200) 	NOT NULL,
 	estado			CHAR(1) 	NOT NULL DEFAULT '1',
 	CONSTRAINT uk_usuario_user UNIQUE (usuario),
 	CONSTRAINT fk_idpersona_user FOREIGN KEY (idpersona) REFERENCES personas(idpersona)
 )ENGINE = INNODB;
 
 INSERT INTO usuarios(idpersona, usuario, clave) VALUES 
-	(1,'irene31', '76364010');
+	(2,'kiara07', '1234');
 
 UPDATE usuarios SET clave = "$2y$10$XAuSPSjRRCQRvdpMDbvMz.tA8U3jo7XF3IF1vuGYITv/ROFj9g0Kq" WHERE idusuario = 1;
 UPDATE usuarios SET clave = '$2y$10$6l64SgQiLw/JChl5/LZLpunseifu/zLQYgYUeNkW.JGDgrleyAiwu' WHERE idusuario = 2;
@@ -98,10 +98,12 @@ CREATE TABLE evento
 
 INSERT INTO evento (idcomplejodeportivo,idcomisario1, idcomisario2, evento, fechainicio) VALUES
 (1,1,2,'Natacion I', '2023-06-05 13:00'),
-(2,2,1,'Atletismo I', '2023-06-05 15:00');
+(2,2,1,'Atletismo I', '2022-06-05 15:00')
+();
+
+
 
 SELECT * FROM evento;
-DROP TABLE evento;
 
 -- Disciplinas
 CREATE TABLE disciplinas
@@ -174,10 +176,23 @@ INSERT INTO detalle_evento (idevento, idparticipante) VALUES
 (1,9),
 (1,10),
 (1,11);
+
 SELECT * FROM detalle_evento;
 
+INSERT INTO detalle_evento (idevento, idparticipante) VALUES
+(2,1),
+(2,2),
+(2,3),
+(2,4),
+(2,5),
+(2,6),
+(2,7),
+(2,8),
+(2,9),
+(2,10),
+(2,11);
 -- PROCEDIMIENTOS ALMACENADOS
--- login
+-
 DELIMITER $$
 CREATE PROCEDURE spu_login_usuarios
 (
@@ -190,4 +205,74 @@ BEGIN
 END $$
 
 CALL spu_login_usuarios('irene31');
+-- Filtrar por año
+DELIMITER$$
+CREATE PROCEDURE spu_filtro_anual()
+BEGIN 
+	SELECT participantes.`idparticipante`, personas.`nombres`, personas.`apellidos`, evento.`evento`, complejo_deportivo.`nombre_complejo`, detalle_evento.`puesto`
+	FROM detalle_evento
+	INNER JOIN evento ON evento.`idevento` = detalle_evento.`idevento`
+	INNER JOIN complejo_deportivo ON complejo_deportivo.idcomplejodeportivo = evento.`idcomplejodeportivo`
+	INNER JOIN participantes ON participantes.`idparticipante` = detalle_evento.`idparticipante`
+	INNER JOIN personas ON personas.`idpersona` = participantes.`idpersona`
+	WHERE evento.`fechainicio` LIKE '%'
+	
+END $$
+
+
+DELIMITER$$
+CREATE PROCEDURE spu_listar_det_eventos()
+BEGIN 
+	SELECT participantes.`idparticipante`, personas.`nombres`, personas.`apellidos`, evento.`evento`, complejo_deportivo.`nombre_complejo`, detalle_evento.`puesto`
+	FROM detalle_evento
+	INNER JOIN evento ON evento.`idevento` = detalle_evento.`idevento`
+	INNER JOIN complejo_deportivo ON complejo_deportivo.idcomplejodeportivo = evento.`idcomplejodeportivo`
+	INNER JOIN participantes ON participantes.`idparticipante` = detalle_evento.`idparticipante`
+	INNER JOIN personas ON personas.`idpersona` = participantes.`idpersona`;
+	
+END $$
+
+CALL spu_listar_det_eventos();
+
+DROP PROCEDURE spu_listar_det_eventos;
+
+DELIMITER $$
+CREATE PROCEDURE spu_registrar_persona
+(
+IN _apellidos 	VARCHAR(50),
+IN _nombres 	VARCHAR(50),
+IN _dni 			CHAR(8),
+IN _fechanac 	DATE,
+IN _direccion 	VARCHAR(100),
+IN _telefono 	CHAR(9),
+IN _correo 		VARCHAR(100)
+)
+BEGIN 
+	INSERT INTO personas(apellidos, nombres, dni, fechanac, direccion, telefono, correo) VALUES 
+	(_apellidos,_nombres, _dni, _fechanac,  _direccion, _telefono, _correo);
+END $$
+CALL spu_registrar_persona('Fernandez, Tasayco', 'Jonathan', '76364020', '1999-02-15','av. manco capac 451','999555111', 'jvbdfh@gmail.com');
+
+DELIMITER $$
+CREATE PROCEDURE spu_listar_disciplinas()
+BEGIN 
+	SELECT * 
+	FROM disciplinas
+	ORDER BY iddisciplina;
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE spu_registrar_participante
+(
+IN _idpersona INT,
+IN _iddisciplina INT,
+IN _distrito VARCHAR(40)
+)
+BEGIN 
+	INSERT INTO participantes (idpersona,iddisciplina,distrito) VALUES
+	(_idpersona,_iddisciplina,_distrito);
+END $$
+
+CALL spu_registrar_participante(15,2,'Grocio Prado');
+
 

@@ -5,12 +5,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Olimpiadas Distritales</title>
-  <link rel="stylesheet" href="../css/principal.css">
-  <script src="https://kit.fontawesome.com/f4286f5039.js" crossorigin="anonymous"></script>
-  <script defer src="../js/principal.js"></script>
+  <!-- bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  
 </head>
 <body>
   <!-- Barra de navegacion -->
+  <!--
   <header class="header">
     <nav class="nav">
       <a href="#" class="logo nav-link">
@@ -24,7 +26,8 @@
           <a href="#" class="nav-menu-link nav-link">Inicio</a>
         </li>
         <li class="nav-menu-item">
-          <a href="#" class="nav-menu-link nav-link">Información</a>
+          <a href="#" class="nav-menu-link nav-link">Participantes
+          </a>
         </li>
         <li class="nav-menu-item">
           <a href="#" class="nav-menu-link nav-link">Registrarse</a>
@@ -34,6 +37,187 @@
         </li>
       </ul>
     </nav>
-  </header>
+  </header>-->
+
+  <div>
+    <!-- informacion general de los juegos olimpicos -->
+  </div>
+
+  <div class="container">
+    <div class="row mt-3 mb-3">
+      <div class="col-md-12">
+        <h1>Lista de Participantes</h1>
+        <button data-bs-target="#modal-registrar" data-bs-toggle="modal" class="btn btn-danger btn-sm mt-1" type="button">Registrar Participante</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-sm table-striped" id="tabla_olimpiadas">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nombres</th>
+              <th>Apellidos</th>
+              <th>Evento</th>
+              <th>Complejo</th>
+              <th>puesto</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>   
+  </div>
+<!-- Modal -->
+<div class="modal fade" id="modal-registrar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Registrar Participantes: </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+        <div class="mb-3">
+          <label for="nombres">Nombres:</label>
+          <input type="text"class="form-control form-control-sm" id="nombres">
+        </div>
+        <div class="mb-3">
+          <label for="apellidos">Apellidos:</label>
+          <input type="text"class="form-control form-control-sm" id="apellidos">
+        </div>
+        <div class="mb-3 row g-2">
+          <div class="col-md">
+            <label for="dni">DNI:</label>
+            <input type="number"class="form-control form-control-sm" id="dni" maxlength="8">
+          </div>
+          <div class="col-md">
+            <label for="telefono">Telefono:</label>
+            <input type="tel"class="form-control form-control-sm" id="telefono" maxlength="9" placeholder="999999999">
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="direccion">Direccion:</label>
+          <input type="text"class="form-control form-control-sm" id="direccion" >
+        </div>
+        <div class="mb-3 row g-2">
+          <div class="col-md">
+            <label for="fecha_nac">Fecha Nacimiento:</label>
+          <input type="date"class="form-control form-control-sm" id="fecha_nac">
+          </div>
+          <div class="col-md">
+            <label for="correo">Correo:</label>
+            <input type="text"class="form-control form-control-sm" id="correo" placeholder="correo@gmail.com">
+          </div>
+        </div>
+        <div class="mb-3 row g-2">
+          <div class="col-md">
+            <label for="disciplinas">Disciplinas:</label>          
+            <select name="disciplinas" class="form-select form-select-sm" id="disciplinas">
+              <option value="">Seleccione</option>
+            </select>
+          </div>
+          <div class="col-md">
+            <label for="distrito">Distrito:</label>          
+            <select name="distrito" class="form-select form-select-sm" id="distrito">
+              <option value="">Seleccione</option>
+              <option value="Sunampe">Sunampe</option>
+              <option value="Pueblo Nuevo">Pueblo Nuevo</option>
+              <option value="Chincha Alta">Chincha Alta</option>
+              <option value="Chincha Baja">Chincha Baja</option>
+              <option value="Grocio Prado">Grocio Prado</option>
+              <option value="El Carmen">El Carmen</option>
+              <option value="Tambo de mora">Tambo de mora</option>
+              <option value="Alto Laran">Alto Laran</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Registrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script src="https://kit.fontawesome.com/f4286f5039.js" crossorigin="anonymous"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const tabla = document.querySelector("#tabla_olimpiadas"); 
+      const body = tabla.querySelector("tbody");
+      const registrar = document.querySelector("#registrar");
+      const disciplinas = document.querySelector("#disciplinas");
+
+
+
+      // listar Participantes y eventos
+      function listartodosEventos(){
+        const parametros = new URLSearchParams();
+        parametros.append("operacion", "listar")
+        fetch("../controllers/det_eventos.controller.php", {
+          method : "POST",
+          body: parametros
+        })
+        .then(response => response.json())
+        .then(datos => {
+          console.log(datos);
+          let numfilas = 1
+            body.innerHTML = ``;
+          datos.forEach(element => {
+            const fila = `
+            <tr>
+              <td>${element.idparticipante}</td>
+              <td>${element.nombres}</td>
+              <td>${element.apellidos}</td>
+              <td>${element.evento}</td>
+              <td>${element.nombre_complejo}</td>
+              <td>${element.puesto}</td>           
+            </tr>
+            `;
+            body.innerHTML += fila;
+            numfilas++;
+          });
+        })
+      }
+
+      function registrarPersonas(){
+        if(confirm('¿Esta seguro de guardar el registro?')){
+            const parametros = new URLSearchParams();
+            parametros.append("operacion", "registrar");
+
+            parametros.append("nombres", document.querySelector('#nombres').value);
+            
+          }
+      }
+
+      function listarDisciplinas(){
+        const parametros = new URLSearchParams();
+        parametros.append("operacion", "listar")
+        fetch("../controllers/disciplina.controller.php", {
+          method : "POST",
+          body: parametros
+        })
+        .then(response => response.json())
+        .then(datos => {
+          datos.forEach(element => {
+            const optionTag = document.createElement("option");
+            optionTag.value = element.iddisciplina;
+            optionTag.text = element.disciplina;
+            disciplinas.appendChild(optionTag);
+            
+          });
+        })
+      }
+
+
+      listarDisciplinas();
+      listartodosEventos();
+      
+      
+    });
+  </script>
 </body>
 </html>
