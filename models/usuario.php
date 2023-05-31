@@ -11,7 +11,7 @@ class Usuario extends Conexion{
 
   public function login($usuario =""){
     try{
-      $consulta = $this->conexion->prepare("CALL spu_login_usuarios(?)");
+      $consulta = $this->conexion->prepare("CALL SPU_LOGIN_USUARIOS(?)");
       $consulta->execute(array($usuario));
       return $consulta->fetch(PDO::FETCH_ASSOC);
     }

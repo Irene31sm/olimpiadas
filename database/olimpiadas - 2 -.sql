@@ -1,6 +1,6 @@
-CREATE DATABASE OLIMPIADAS_1;
-USE OLIMPIADAS_1;
-DROP DATABASE OLIMPIADAS_1;
+CREATE DATABASE OLIMPIADAS;
+USE OLIMPIADAS;
+DROP DATABASE OLIMPIADAS;
 -- TABLAS 
 CREATE TABLE personas
 (
@@ -67,6 +67,10 @@ INSERT INTO olimpiadas (nombre, fechainicio, fechafin) VALUES
 ('OLIMPIADAS DISTRITALES 2022','2022-06-15','2022-06-30'),
 ('OLIMPIADAS DISTRITALES 2023','2023-06-12',NULL);
 
+INSERT INTO olimpiadas (nombre, fechainicio, fechafin) VALUES
+('OLIMPIADAS DISTRITALES 2024','2024-07-15','');
+SELECT * FROM olimpiadas;
+
 CREATE TABLE delegaciones
 (
 	iddelegacion 		INT AUTO_INCREMENT PRIMARY KEY,
@@ -87,7 +91,7 @@ INSERT INTO delegaciones (delegacion) VALUES
 ('San Juan de Yanac'),
 ('San pedro de Huarcarpana');
 
-SELECT * FROM delegacion;
+SELECT * FROM delegaciones;
 
 CREATE TABLE disciplinas
 (
@@ -124,7 +128,13 @@ INSERT INTO detalle_disciplinas (idolimpiada, iddisciplina) VALUES
 (2,1),
 (2,2),
 (2,3),
-(2,4);
+(2,4),
+(2,7),
+(2,8),
+(3,1),
+(3,3),
+(3,7),
+(3,8);
 SELECT * FROM detalle_disciplinas;
 
 SELECT detalle_disciplinas.iddetalle, olimpiadas.nombre, disciplinas.disciplina
@@ -132,36 +142,71 @@ FROM detalle_disciplinas
 INNER JOIN olimpiadas ON olimpiadas.idolimpiadas = detalle_disciplinas.idolimpiada
 INNER JOIN disciplinas ON disciplinas.iddisciplinas = detalle_disciplinas.iddisciplina;
 
+CREATE TABLE equipos
+(
+	idequipo 		INT AUTO_INCREMENT PRIMARY KEY,
+	iddelegacion		INT 	NOT NULL,
+	idparticipante		INT 	NOT NULL,	
+	CONSTRAINT fk_delegacion_int FOREIGN KEY (iddelegacion) REFERENCES delegaciones(iddelegacion), 
+	CONSTRAINT fk_participantes_int FOREIGN KEY (idparticipante) REFERENCES personas(idpersona)
+)ENGINE = INNODB;
+
+INSERT INTO equipos (iddelegacion, idparticipante) VALUES
+(1,12),
+(2,10),
+(3,9),
+(4,11),
+(5,8),
+(6,7),
+(6,6),
+(1,5),
+(4,1),
+(5,2),
+(6,4),
+(6,13),
+(1,3);
+
+SELECT equipos.`idequipo`, personas.`nombres`, personas.`apellidos`,delegaciones.`delegacion`
+FROM equipos 
+INNER JOIN personas ON personas.idpersona = equipos.idparticipante
+INNER JOIN delegaciones ON delegaciones.iddelegacion = equipos.iddelegacion
+
 CREATE TABLE integrantes
 (
-	idintegrante 		INT AUTO_INCREMENT PRIMARY KEY,
-	iddelegacion		INT 	NOT NULL,
-	idparticipante		INT 	NOT NULL,
-	iddetalle			INT 	NOT NULL,
-	CONSTRAINT fk_delegacion_int FOREIGN KEY (iddelegacion) REFERENCES delegaciones(iddelegacion), 
-	CONSTRAINT fk_participantes_int FOREIGN KEY (idparticipante) REFERENCES personas(idpersona),
+	idintegrantes 		INT AUTO_INCREMENT PRIMARY KEY,
+	iddetalle		INT 	NOT NULL,
+	idequipo		INT 	NOT NULL,	
+	CONSTRAINT fk_equipo_int FOREIGN KEY (idequipo) REFERENCES equipos(idequipo),
 	CONSTRAINT fk_detalle_int FOREIGN KEY (iddetalle) REFERENCES detalle_disciplinas(iddetalle)
 )ENGINE = INNODB;
 
-INSERT INTO integrantes (iddelegacion, idparticipante, iddetalle) VALUES
-(1,12,1),
-(2,10,1),
-(3,9,1),
-(4,11,1),
-(5,8,2),
-(6,7,2),
-(6,6,2),
-(1,5,2);
 
-SELECT 	integrantes.idintegrante, 
+INSERT INTO integrantes (iddetalle, idequipo) VALUES
+(1,1),-- sumanpe
+(2,8),
+(3,13),
+(4,6),-- el carmen
+(5,7),
+(6,11),
+(6,12),
+(1,3),-- chincha alta
+(4,4), -- chincha baja
+(5,9),
+(6,10),-- Grocio
+(6,5),
+(1,2); -- pueblo nuevo
+
+
+SELECT 	integrantes.idintegrantes 'id', 
 			olimpiadas.nombre, 
 			disciplinas.disciplina, 
 			personas.nombres, 
 			personas.apellidos,
 			delegaciones.delegacion
 FROM integrantes
-INNER JOIN personas ON personas.idpersona = integrantes.idparticipante
-INNER JOIN delegaciones ON delegaciones.iddelegacion = integrantes.iddelegacion
+INNER JOIN equipos ON equipos.idequipo = integrantes.idequipo
+INNER JOIN personas ON personas.idpersona = equipos.idparticipante
+INNER JOIN delegaciones ON delegaciones.iddelegacion = equipos.iddelegacion
 INNER JOIN detalle_disciplinas ON detalle_disciplinas.iddetalle = integrantes.iddetalle
 INNER JOIN olimpiadas ON olimpiadas.idolimpiadas = detalle_disciplinas.idolimpiada
 INNER JOIN disciplinas ON disciplinas.iddisciplinas = detalle_disciplinas.iddisciplina
@@ -172,13 +217,34 @@ CREATE TABLE ganadores
 	idganador 		INT AUTO_INCREMENT PRIMARY KEY,
 	idintegrante	INT NOT NULL,
 	puesto			CHAR(1)	NOT NULL, -- 1 = primer puesto, 2 segundo puesto, 3 tercer puesto,
-	CONSTRAINT fk_integrante_gana FOREIGN KEY (idintegrante) REFERENCES integrantes(idintegrante)
+	CONSTRAINT fk_integrante_gana FOREIGN KEY (idintegrante) REFERENCES integrantes(idintegrantes)
 )ENGINE = INNODB;
 
 INSERT INTO ganadores (idintegrante, puesto) VALUES 
+(7,'1'),
+(12,'2'),
+(6,'3'),
+(3,'1'),
+(4,'1'),
+(9,'2'), 
 (1,'1'),
-(3,'2'),
-(4,'3'),
-(8,'1'),
-(5,'2'),
-(7,'3');
+(13,'2'),
+(8,'3'),
+(10,'1'),
+(5,'2');
+
+SELECT 	ganadores.idganador,
+	delegaciones.delegacion,
+	olimpiadas.nombre, 	
+	disciplinas.disciplina, 
+	personas.nombres, 
+	personas.apellidos,
+	ganadores.`puesto`
+FROM ganadores
+INNER JOIN integrantes ON integrantes.idintegrantes = ganadores.idintegrante
+INNER JOIN equipos ON equipos.`idequipo` = integrantes.`idequipo`
+INNER JOIN personas ON personas.idpersona = equipos.`idparticipante`
+INNER JOIN delegaciones ON delegaciones.iddelegacion = equipos.`iddelegacion`
+INNER JOIN detalle_disciplinas ON detalle_disciplinas.iddetalle = integrantes.iddetalle
+INNER JOIN olimpiadas ON olimpiadas.idolimpiadas = detalle_disciplinas.idolimpiada
+INNER JOIN disciplinas ON disciplinas.iddisciplinas = detalle_disciplinas.iddisciplina

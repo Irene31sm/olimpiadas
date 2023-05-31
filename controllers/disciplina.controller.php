@@ -11,4 +11,17 @@ if(isset($_POST['operacion'])){
   echo json_encode($datos);
     
   }
+  if($_POST['operacion'] == 'listardisciplinas'){
+    $datos = $disciplina->listarDisciplinasolimpiadas($_POST['idolimpiada']);
+    
+  echo json_encode($datos);
+    
+  }
+
+  if($_POST['operacion'] == 'listarDetalle'){
+    $datos = $disciplina->listarDetalle();
+    
+  echo json_encode($datos);
+    
+  }
 }

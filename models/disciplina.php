@@ -11,7 +11,7 @@ class Disciplina extends Conexion{
 
   public function listarDisciplinas(){
     try{
-      $consulta = $this->conexion->prepare("CALL spu_listar_disciplinas()");
+      $consulta = $this->conexion->prepare("CALL SPU_LISTAR_DISCIPLINAS()");
       $consulta->execute();
       return $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -19,6 +19,30 @@ class Disciplina extends Conexion{
       die($e->getMessage());
     }
   }
+  public function listarDisciplinasolimpiadas($idolimpiada){
+    try{
+      $consulta = $this->conexion->prepare("CALL SPU_LISTAR_DISCIPLINAS_ANUAL(?)");
+      $consulta->execute(array($idolimpiada));
+      return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    }
+    catch(Exception $e){
+      die($e->getMessage());
+    }
+  }
+
+  
+
+  public function listarDetalle(){
+    try{
+      $consulta = $this->conexion->prepare("CALL SPU_LISTAR_DETALLE()");
+      $consulta->execute();
+      return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    }
+    catch(Exception $e){
+      die($e->getMessage());
+    }
+  }
+
 
   
 }

@@ -7,7 +7,7 @@
   <title>Olimpiadas Distritales</title>
   <!-- bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   
 </head>
 <body>
@@ -39,38 +39,111 @@
     </nav>
   </header>-->
 
-  <div>
-    <!-- informacion general de los juegos olimpicos -->
-  </div>
-
+  <!-- Lista de ganadores  -->
   <div class="container">
     <div class="row mt-3 mb-3">
       <div class="col-md-12">
-        <h1>Lista de Participantes</h1>
-        <button data-bs-target="#modal-registrar" data-bs-toggle="modal" class="btn btn-danger btn-sm mt-1" type="button">Registrar Participante</button>
+        <h1>Lista de Ganadores</h1>
+      </div>
+    </div>
+    <div class="row mt-3 mb-3">
+      <div class="col-md-12">
+        <div class="row g-2 mb-3">  
+          <div class="col-md-3">
+            <label for="">Años:</label>
+          </div>
+          <div class="col-md-3">
+            <select name="anual" id="anual" class="form-select form-select-sm">
+              <option value="">Seleccione</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label for="">Disciplinas:</label>
+          </div>
+          <div class="col-md-3">
+            <select name="olimpiada_disciplina" id="olimpiada_disciplina" class="form-select form-select-sm">
+              <option value="">Seleccione</option>
+            </select>
+          </div>
+        </div>          
+      </div>
+      <div class="row mt-3 mb-3 col-md-3">
+        <button id="consultar" class="btn btn-info btn-sm mt-1" type="button">Consultar</button>
+        <button id="registrarganador" class="btn btn-success btn-sm mt-1" data-bs-toggle="modal" data-bs-target="#registrar-ganador" type="button">Registar Ganadores</button>
       </div>
     </div>
     <div class="row">
       <div class="col-md-12">
-        <table class="table table-sm table-striped" id="tabla_olimpiadas">
+        <table class="table table-sm table-striped table-success" id="tabla_olimpiadas">
           <thead>
             <tr>
-              <th>#</th>
+              <th>Puesto</th>
+              <th>Olimpiadas</th>
+              <th>Disciplinas</th>
               <th>Nombres</th>
               <th>Apellidos</th>
-              <th>Evento</th>
-              <th>Complejo</th>
-              <th>puesto</th>
+              <th>Delegacion</th>
             </tr>
           </thead>
           <tbody>
           </tbody>
         </table>
       </div>
-    </div>   
+    </div> 
+    <!-- registrarse en las olimpiadas 2024 -->
+    <div class="row mt-3 mb-3">
+      <div class="col-md-12">
+        <h1 class="">Registrate en las Olimpiadas</h1>
+      </div>
+    </div>
+    <div class="row mt-3 mb-3">
+      <div class="col-md-12">
+        <div class="row g-2 mb-3">  
+          <form class="form-horizontal" id="form-registro">
+            <div class="mb-3 row g-2">
+              <div class="col-md-10">
+                <label for="">Participantes:</label>          
+                <select name="participantes" class="form-select form-select-sm" id="participantes">
+                  <option value="">Seleccione</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <div class="d-grid">
+                  <Agregar id="agregarPersona" class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#registrar-ganador">Agregar</button>
+                </div>                
+              </div>
+            </div>
+            <div class="mb-3 row g-2">
+              <div class="col-md">
+                <label for="detalle">Disciplinas:</label>          
+                <select name="detalle" class="form-select form-select-sm" id="detalle">
+                  <option value="">Seleccione</option>
+                </select> 
+                <!-- <label for="disciplinas">Disciplinas:</label>          
+                <select name="disciplinas" class="form-select form-select-sm" id="disciplinas">
+                  <option value="">Seleccione</option>
+                </select> -->
+              </div>
+              <div class="col-md">
+                <label for="delegacion">Delegaciones:</label>          
+                <select name="delegacion" class="form-select form-select-sm" id="delegacion">
+                  <option value="">Seleccione</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="d-grid">
+                <button id="agregarintegrante" class="btn btn-success btn-sm mt-1" type="button">Agregar</button>
+              </div> 
+            </div>
+          </form>
+        </div>          
+      </div>
+    </div> 
+    
   </div>
-<!-- Modal -->
-<div class="modal fade" id="modal-registrar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- Modal Registro Persona -->
+  <div class="modal fade" id="modal-registrar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -78,86 +151,101 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        
         <div class="mb-3">
-          <label for="nombres">Nombres:</label>
-          <input type="text"class="form-control form-control-sm" id="nombres">
+          <label for="md-nombres">Nombres:</label>
+          <input type="text"class="form-control form-control-sm" id="md-nombres">
         </div>
         <div class="mb-3">
-          <label for="apellidos">Apellidos:</label>
-          <input type="text"class="form-control form-control-sm" id="apellidos">
+          <label for="md-apellidos">Apellidos:</label>
+          <input type="text"class="form-control form-control-sm" id="md-apellidos">
         </div>
         <div class="mb-3 row g-2">
           <div class="col-md">
-            <label for="dni">DNI:</label>
-            <input type="number"class="form-control form-control-sm" id="dni" maxlength="8">
+            <label for="md-dni">DNI:</label>
+            <input type="number"class="form-control form-control-sm" id="md-dni" maxlength="8">
           </div>
           <div class="col-md">
-            <label for="telefono">Telefono:</label>
-            <input type="tel"class="form-control form-control-sm" id="telefono" maxlength="9" placeholder="999999999">
+            <label for="md-telefono">Telefono:</label>
+            <input type="tel"class="form-control form-control-sm" id="md-telefono" maxlength="9" placeholder="999999999">
           </div>
         </div>
         <div class="mb-3">
-          <label for="direccion">Direccion:</label>
-          <input type="text"class="form-control form-control-sm" id="direccion" >
+          <label for="md-direccion">Direccion:</label>
+          <input type="text"class="form-control form-control-sm" id="md-direccion" >
         </div>
         <div class="mb-3 row g-2">
           <div class="col-md">
-            <label for="fecha_nac">Fecha Nacimiento:</label>
-          <input type="date"class="form-control form-control-sm" id="fecha_nac">
+            <label for="md-fecha_nac">Fecha Nacimiento:</label>
+          <input type="date"class="form-control form-control-sm" id="md-fecha_nac">
           </div>
           <div class="col-md">
-            <label for="correo">Correo:</label>
-            <input type="text"class="form-control form-control-sm" id="correo" placeholder="correo@gmail.com">
+            <label for="md-correo">Correo:</label>
+            <input type="text"class="form-control form-control-sm" id="md-correo" placeholder="correo@gmail.com">
           </div>
         </div>
-        <div class="mb-3 row g-2">
-          <div class="col-md">
-            <label for="disciplinas">Disciplinas:</label>          
-            <select name="disciplinas" class="form-select form-select-sm" id="disciplinas">
-              <option value="">Seleccione</option>
-            </select>
-          </div>
-          <div class="col-md">
-            <label for="distrito">Distrito:</label>          
-            <select name="distrito" class="form-select form-select-sm" id="distrito">
-              <option value="">Seleccione</option>
-              <option value="Sunampe">Sunampe</option>
-              <option value="Pueblo Nuevo">Pueblo Nuevo</option>
-              <option value="Chincha Alta">Chincha Alta</option>
-              <option value="Chincha Baja">Chincha Baja</option>
-              <option value="Grocio Prado">Grocio Prado</option>
-              <option value="El Carmen">El Carmen</option>
-              <option value="Tambo de mora">Tambo de mora</option>
-              <option value="Alto Laran">Alto Laran</option>
-            </select>
-          </div>
-        </div>
-
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Registrar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Cancelar</button>
+        <button type="button" class="btn btn-primary" id="btn-registrar-md">Registrar</button>
       </div>
     </div>
   </div>
-</div>
+  </div>
+
+  <!-- modal registrar ganadores -->
+  <div class="modal fade" id="registrar-ganador" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...holi
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <script src="https://kit.fontawesome.com/f4286f5039.js" crossorigin="anonymous"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
+      //Tabla
       const tabla = document.querySelector("#tabla_olimpiadas"); 
       const body = tabla.querySelector("tbody");
-      const registrar = document.querySelector("#registrar");
-      const disciplinas = document.querySelector("#disciplinas");
+      const anual = document.querySelector("#anual");
+      const oli_disc = document.querySelector("#olimpiada_disciplina");
+      const consultar = document.querySelector("#consultar");
 
+      const registrar = document.querySelector("#registrar");       
+      const agregarintegrante = document.querySelector("#agregarintegrante");
+      const participantes = document.querySelector("#participantes");
+      const delegacion = document.querySelector("#delegacion");
+      const detalle = document.querySelector("#detalle");
 
+      //Modal Registrar Persona
+      const modal = new bootstrap.Modal(document.querySelector("#form-registro"))
+      const nombres = document.querySelector("#md-nombres");
+      const apellidos = document.querySelector("#md-apellidos");
+      const dni = document.querySelector("#md-dni");
+      const telefono = document.querySelector("#md-telefono");
+      const direccion = document.querySelector("#md-direccion");
+      const fechanac = document.querySelector("#md-fecha_nac");
+      const correo = document.querySelector("#md-correo");
+      const registrar_persona = document.querySelector("#btn-registrar-md");
 
-      // listar Participantes y eventos
-      function listartodosEventos(){
+      let fecha='';
+      // listar Ganadores por año
+      function listar(){
         const parametros = new URLSearchParams();
-        parametros.append("operacion", "listar")
-        fetch("../controllers/det_eventos.controller.php", {
+        parametros.append("operacion", "listarAnual");
+        parametros.append("anual", anual.value);
+        fetch("../controllers/olimpiada.controller.php", {
           method : "POST",
           body: parametros
         })
@@ -165,16 +253,16 @@
         .then(datos => {
           console.log(datos);
           let numfilas = 1
-            body.innerHTML = ``;
+          body.innerHTML = ``;
           datos.forEach(element => {
             const fila = `
             <tr>
-              <td>${element.idparticipante}</td>
+              <td>${element.puesto}</td>
+              <td>${element.nombre}</td>
+              <td>${element.disciplina}</td>
               <td>${element.nombres}</td>
               <td>${element.apellidos}</td>
-              <td>${element.evento}</td>
-              <td>${element.nombre_complejo}</td>
-              <td>${element.puesto}</td>           
+              <td>${element.delegacion}</td>           
             </tr>
             `;
             body.innerHTML += fila;
@@ -183,40 +271,173 @@
         })
       }
 
-      function registrarPersonas(){
-        if(confirm('¿Esta seguro de guardar el registro?')){
-            const parametros = new URLSearchParams();
-            parametros.append("operacion", "registrar");
-
-            parametros.append("nombres", document.querySelector('#nombres').value);
+      
+      function listarPersonas(){
+        const parametros = new URLSearchParams();
+        parametros.append("operacion", "listarPersonas");
+        fetch("../controllers/personas.controllers.php", {
+          method : "POST",
+          body: parametros
+        })
+        .then(response => response.json())
+        .then(datos => {
+          console.log(datos);
+          datos.forEach(element => {
+            const optionTag = document.createElement("option");
+            optionTag.value = element.idpersona;
+            optionTag.text = element.nombres + ", "+element.apellidos;
+            participantes.appendChild(optionTag);
             
-          }
+          });
+        })
       }
 
       function listarDisciplinas(){
         const parametros = new URLSearchParams();
-        parametros.append("operacion", "listar")
+        parametros.append("operacion", "listarDetalle");
         fetch("../controllers/disciplina.controller.php", {
           method : "POST",
           body: parametros
         })
         .then(response => response.json())
         .then(datos => {
+          console.log(datos);
           datos.forEach(element => {
             const optionTag = document.createElement("option");
-            optionTag.value = element.iddisciplina;
-            optionTag.text = element.disciplina;
-            disciplinas.appendChild(optionTag);
+            optionTag.value = element.iddetalle;
+            optionTag.text = element.disciplina+" - "+element.fecha;
+            detalle.appendChild(optionTag);
             
           });
         })
       }
 
+      function listarDelegaciones(){
+        const parametros = new URLSearchParams();
+        parametros.append("operacion", "listar");
+        fetch("../controllers/delegaciones.controller.php", {
+          method : "POST",
+          body: parametros
+        })
+        .then(response => response.json())
+        .then(datos => {
+          console.log(datos);
+          datos.forEach(element => {
+            const optionTag = document.createElement("option");
+            optionTag.value = element.iddelegacion;
+            optionTag.text = element.delegacion;
+            delegacion.appendChild(optionTag);
+            
+          });
+        })
+      }
 
+      function registrarIntegrantes(){
+        if(confirm('¿Esta seguro de guardar el registro?')){
+            const parametros = new URLSearchParams();
+            parametros.append("operacion", "registrar");
+            parametros.append("idparticipante", participantes.value);
+            parametros.append("iddetalle", detalle.value);
+            parametros.append("iddelegacion", delegacion.value);
+
+            
+            fetch("../controllers/integrantes.controller.php",{
+              method: 'POST',
+              body: parametros
+            })
+              .then(response => response.json())
+              .then(datos => {
+                if(datos.status){
+                  alert("Registro Guardado Correctamente");
+                  document.querySelector("#form-registro").reset();
+                  participantes.focus();
+                }else{
+                  alert(datos.mensaje);
+                }
+              })
+          }
+      }
+
+      function registrarPersonas(){
+        if(confirm('¿Esta seguro de guardar el registro?')){
+            const parametros = new URLSearchParams();
+            parametros.append("operacion", "registrar");
+            parametros.append("nombres", nombres.value);
+            parametros.append("apellidos", apellidos.value);
+            parametros.append("dni", dni.value);
+            parametros.append("fechanac", fechanac.value);
+            parametros.append("direccion", direccion.value);
+            parametros.append("telefono", telefono.value);
+            parametros.append("correo", correo.value);
+            
+            fetch("../controllers/personas.controllers.php",{
+              method: 'POST',
+              body: parametros
+            })
+              .then(response => response.json())
+              .then(datos => {
+                if(datos.status){
+                  alert("Registro Guardado Correctamente");
+                  
+                }else{
+                  alert(datos.mensaje);
+                }
+              })
+          }
+      }
+
+      function listarOlimpiadas(){
+        const parametros = new URLSearchParams();
+        parametros.append("operacion", "listarOlimpiadas");
+        fetch("../controllers/olimpiada.controller.php", {
+          method : "POST",
+          body: parametros
+        })
+        .then(response => response.json())
+        .then(datos => {
+          console.log(datos);
+          datos.forEach(element => {
+            const optionTag = document.createElement("option");
+            optionTag.value = element.fecha;
+            optionTag.text = element.fecha;
+            anual.appendChild(optionTag);
+          });
+        })
+      }
+      
+      function listarOlimpiadas_disciplinas(){
+        const parametros = new URLSearchParams();
+        parametros.append("operacion", "listardisciplinas");
+        parametros.append("idolimpiada",parseInt(anual.value));
+        fetch("../controllers/disciplina.controller.php", {
+          method : "POST",
+          body: parametros
+        })
+        .then(response => response.json())
+        .then(datos => {
+          console.log(datos);
+          datos.forEach(element => {
+            const optionTag = document.createElement("option");
+            optionTag.value = element.iddisciplinas;
+            optionTag.text = element.disciplina;
+            oli_disc.appendChild(optionTag);
+            
+          });
+        })
+      }
+      
+      
+      listarDelegaciones();
       listarDisciplinas();
-      listartodosEventos();
+      listarPersonas();
+      listarOlimpiadas();
+      listar();
+
+      //Eventos
       
-      
+      anual.addEventListener("change", listar);
+      agregarintegrante.addEventListener("click", registrarIntegrantes);
+      registrar_persona.addEventListener("click",registrarPersonas);
     });
   </script>
 </body>

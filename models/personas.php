@@ -24,8 +24,7 @@ class Persona extends Conexion{
           $datos["fechanac"],
           $datos["direccion"],
           $datos["telefono"],
-          $datos["correo"],
-
+          $datos["correo"]
         )
       );
     }
@@ -33,6 +32,17 @@ class Persona extends Conexion{
       $respuesta["mensaje"] = "No se pudo guadar. Codigo: ". $e->getCode();
     }
     return $respuesta;
+  }
+
+  public function listarPersonas(){
+    try{
+      $consulta = $this->conexion->prepare("CALL SPU_LISTA_PERSONAS()");
+      $consulta->execute();
+      return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    }
+    catch(Exception $e){
+      die($e->getMessage());
+    }
   }
 
   

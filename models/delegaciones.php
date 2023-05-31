@@ -2,16 +2,16 @@
 
 require_once 'conexion.php';
 
-class Detalle extends Conexion{
+class Delegacion extends Conexion{
   private $conexion;
 
   public function __CONSTRUCT(){
     $this->conexion = parent::getConexion();
   }
 
-  public function listarTodosEventos(){
+  public function listarDelegaciones(){
     try{
-      $consulta = $this->conexion->prepare("CALL spu_listar_det_eventos()");
+      $consulta = $this->conexion->prepare("CALL SPU_LISTAR_DELEGACIONES()");
       $consulta->execute();
       return $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
