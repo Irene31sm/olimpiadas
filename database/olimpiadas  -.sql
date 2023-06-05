@@ -35,9 +35,9 @@ CREATE TABLE usuarios
 CREATE TABLE olimpiadas
 (
 	idolimpiadas			INT AUTO_INCREMENT PRIMARY KEY,
-	nombre				VARCHAR(60)	NOT NULL,
-	fechainicio			DATETIME 	NOT NULL,
-	fechafin			DATETIME 	NULL,
+	nombre					VARCHAR(60)	NOT NULL,
+	fechainicio				DATE 	NOT NULL,
+	fechafin					DATE 	NULL,
 	CONSTRAINT uk_nombre_oli UNIQUE (nombre)
 )ENGINE = INNODB;
 

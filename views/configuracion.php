@@ -18,11 +18,11 @@
                         <div class="mb-3 row g-2">                  
                             <div class="col-md-6">
                                 <label for="delegacion">Fecha Incio:</label>          
-                                <input type="date" id="fechainicio" class="form-control">
+                                <input type="date" value="2017-06-01" id="fechainicio" class="form-control">
                             </div> 
                             <div class="col-md-6">
                                 <label for="delegacion">Fecha Fin:</label>          
-                                <input type="date" id="fechafin" class="form-control">
+                                <input type="date" id="fechafin" value="2017-06-01" class="form-control">
                             </div>
                         </div>
                         <div class="mb-3 row g-2">
@@ -89,9 +89,9 @@
         if(confirm('¿Esta seguro de guardar?')){
             const parametros = new URLSearchParams();
             parametros.append("operacion", "registrarOlimpiada");
-            parametros.append("nombre", nombre);
-            parametros.append("fechainicio", fechainicio);            
-            parametros.append("fechafin", fechafin);            
+            parametros.append("nombre", nombre.value);
+            parametros.append("fechainicio", fechainicio.value);            
+            parametros.append("fechafin", fechafin.value);             
             fetch("../controllers/olimpiada.controller.php",{
               method: 'POST',
               body: parametros
@@ -103,13 +103,6 @@
                   alert("Registro Guardado Correctamente");
                   document.querySelector("#form-olimpiada").reset();                  
                 }
-                else{
-                  alert(datos.mensaje);
-                }
-              })
-              .catch(error =>{
-                alert("Error al Guardar");
-                document.querySelector("#form-olimpiada").reset();
               })
               
           }
@@ -125,7 +118,6 @@
         })
         .then(response => response.json())
         .then(datos => {
-          console.log(datos);
           datos.forEach(element => {
             disciplina.value = element.disciplina;
           });
@@ -162,4 +154,5 @@
       }
     iddisciplina.addEventListener("keypress", buscarDisciplina);
     editar.addEventListener("click", editarDisciplina);
+    registrar.addEventListener("click", registrarOlimpiada);
 </script>

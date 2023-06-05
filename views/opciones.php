@@ -10,7 +10,7 @@ switch ($permiso){
       ["menu" => "Olimpiadas", "url" => "index.php?view=ganadores.php"],
       ["menu" => "Formulario de registro", "url" => "index.php?view=registrar-equipos.php"],
       ["menu" => "Reporte", "url" => "index.php?view=reportes.php"],
-      ["menu" => "Configurar cuenta", "url" => "index.php?view=configuracion.php"]
+      ["menu" => "Configuración", "url" => "index.php?view=configuracion.php"]
     ];
   break;
   case "EDT":

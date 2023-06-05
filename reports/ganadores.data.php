@@ -17,7 +17,7 @@
         <th>Disciplina</th>
         <th>Nombres</th>
         <th>Apellidos</th>
-        <th>Delegacion</th>
+        <th>Delegación</th>
     </tr>
   </thead>
   <tbody>

@@ -11,7 +11,7 @@
   </colgroup>
   <thead>
     <tr>
-        <th>Delegacion</th>
+        <th>Delegación</th>
         <th>Disciplinas</th>
         <th>Nombres</th>
         <th>Apellidos</th>

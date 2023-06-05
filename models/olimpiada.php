@@ -19,6 +19,7 @@ class Olimpiada extends Conexion{
       die($e->getMessage());
     }
   }
+
   public function registrarGanador($datos = []){
     $respuesta = [
       "status" => false,
@@ -45,7 +46,7 @@ class Olimpiada extends Conexion{
       "mensaje" => ""
     ];
     try{
-      $consulta = $this->conexion->prepare("CALL SPU_REGISTRAR_OLIMPIADA(?,?)");
+      $consulta = $this->conexion->prepare("CALL SPU_REGISTRAR_OLIMPIADA(?,?,?)");
       $respuesta["status"]=$consulta->execute(
         array(
           $datos["nombre"],

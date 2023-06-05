@@ -48,7 +48,6 @@
         })
         .then(response => response.json())
         .then(datos => {
-          console.log(datos);
           datos.forEach(element => {
             const optionTag = document.createElement("option");
             optionTag.value = element.idolimpiadas;
@@ -71,9 +70,9 @@
             }
           ]
         }
-      })
+    })
       
-      const graficoBarras2= new Chart(grafico2, {
+    const graficoBarras2= new Chart(grafico2, {
         type: 'bar',
         data: {
           labels:[],
@@ -85,7 +84,7 @@
             }
           ]
         }
-      })
+    })
 
       function datosBarras() {
         const parametros = new URLSearchParams();

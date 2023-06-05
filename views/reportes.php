@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row mt-3 mb-3">
       <div class="col-md-12">
-        <h1>Lista de Integrantes</h1>
+        <h1>Lista de Integrantes por año:</h1>
       </div>
     </div>
     <div class="row mt-3 mb-3">
@@ -53,7 +53,6 @@
         })
         .then(response => response.json())
         .then(datos => {
-          console.log(datos);
           datos.forEach(element => {
             const optionTag = document.createElement("option");
             optionTag.value = element.idolimpiadas;
@@ -73,7 +72,6 @@
         })
         .then(response => response.json())
         .then(datos => {
-          console.log(datos);
           let numfilas = 1
           body.innerHTML = ``;
           datos.forEach(element => {

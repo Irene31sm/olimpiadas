@@ -179,7 +179,6 @@
         })
         .then(response => response.json())
         .then(datos => {
-          console.log(datos);
           datos.forEach(element => {
             const optionTag = document.createElement("option");
             optionTag.value = element.idpersona;
@@ -199,7 +198,6 @@
         })
         .then(response => response.json())
         .then(datos => {
-          console.log(datos);
           datos.forEach(element => {
             const optionTag = document.createElement("option");
             optionTag.value = element.iddelegacion;
@@ -220,7 +218,6 @@
         })
         .then(response => response.json())
         .then(datos => {
-          console.log(datos);
           participantes.innerHTML = "<option value=''>Seleccione</option>";
           datos.forEach(element => {
             const optionTag = document.createElement("option");
@@ -241,7 +238,6 @@
         })
         .then(response => response.json())
         .then(datos => {
-          console.log(datos);
           datos.forEach(element => {
             const optionTag = document.createElement("option");
             optionTag.value = element.iddetalle;

@@ -128,7 +128,6 @@ if (!isset($_SESSION['login']) || !$_SESSION['login']['acceso']){
   <script src="js/app.min.js"></script>
   <script src="libs/apexcharts/dist/apexcharts.min.js"></script>
   <script src="libs/simplebar/dist/simplebar.js"></script>
-  <script src="js/dashboard.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script>
@@ -147,7 +146,6 @@ if (!isset($_SESSION['login']) || !$_SESSION['login']['acceso']){
         })
         .then(response => response.json())
         .then(datos => {
-          console.log(datos);
           datos.forEach(element => {
             const optionTag = document.createElement("option");
             optionTag.value = element.idolimpiadas;

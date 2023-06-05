@@ -250,6 +250,7 @@ BEGIN
 	INSERT INTO olimpiadas (nombre, fechainicio, fechafin) VALUES (_nombre, _fechainicio, _fechafin);
 END $$
 
+CALL SPU_REGISTRAR_OLIMPIADA('Olimpiada 2025','2025/05/05','2025/06/05');
 
 -- GRAFICOS
 -- CANTIDAD DE PARTICIPANTES REGISTRADOS POR DICIPLINA POR AÑO0

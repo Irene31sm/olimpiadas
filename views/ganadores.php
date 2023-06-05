@@ -132,7 +132,6 @@
         })
         .then(response => response.json())
         .then(datos => {
-          console.log(datos);
           let numfilas = 1
           card.innerHTML = ``;
           datos.forEach(element => {
@@ -183,7 +182,6 @@
         })
         .then(response => response.json())
         .then(datos => {
-          console.log(datos);
           datos.forEach(element => {
             const optionTag = document.createElement("option");
             optionTag.value = element.idolimpiadas;
@@ -203,7 +201,6 @@
         })
         .then(response => response.json())
         .then(datos => {
-          console.log(datos);
           oli_disc.innerHTML="<option value=''>Seleccione</option>";
           if(datos){
               datos.forEach(element => {
@@ -229,7 +226,6 @@
         })
         .then(response => response.json())
         .then(datos => {
-          console.log(datos);
           datos.forEach(element => {
             const optionTag = document.createElement("option");
             optionTag.value = element.iddelegacion;
@@ -250,7 +246,6 @@
         })
         .then(response => response.json())
         .then(datos => {
-          console.log(datos);
           m_disciplinas.innerHTML = "<option value=''>Seleccione</option>";
           datos.forEach(element => {
             const optionTag = document.createElement("option");
@@ -272,7 +267,6 @@
         })
         .then(response => response.json())
         .then(datos => {
-          console.log(datos);
           datos.forEach(element => {
             resumen.value = element.nombre + " - " + element.delegacion + " - " + element.disciplina ;
             idintegrante = element.id;
@@ -296,7 +290,6 @@
             })
               .then(response => response.json())
               .then(datos => {
-                console.log(datos);
                 if(datos.status){
                   alert("Registro Guardado Correctamente");
                   document.querySelector("#form-ganador").reset();
