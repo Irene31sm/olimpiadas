@@ -15,7 +15,11 @@ if(isset($_POST['operacion'])){
       "telefono"          => $_POST['telefono'],
       "correo"            => $_POST['correo']
     ];
-      $respuesta = $automovil->registrarPersona($datosGuardados);
+      $respuesta = $persona->registrarPersona($datosGuardados);
       echo json_encode($respuesta);
+  }
+  if($_POST['operacion'] == 'listarUltimo'){
+    $dato = $persona->listarUltimaPersona();    
+    echo json_encode($dato);    
   }
 }

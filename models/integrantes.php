@@ -15,12 +15,11 @@ class Integrante extends Conexion{
       "mensaje" => ""
     ];
     try{
-      $consulta = $this->conexion->prepare("CALL SPU_REGISTRAR_INTEGRANTE(?,?,?)");
+      $consulta = $this->conexion->prepare("CALL SPU_REGISTRAR_INTEGRANTES(?,?)");
       $respuesta["status"]=$consulta->execute(
         array(
-          $datos["iddelegacion"],
-          $datos["idparticipante"],
-          $datos["iddetalle"]
+          $datos["iddetalle"],
+          $datos["idequipo"]
         )
       );
     }
@@ -28,6 +27,38 @@ class Integrante extends Conexion{
       $respuesta["mensaje"] = "No se pudo guadar. Codigo: ". $e->getCode();
     }
     return $respuesta;
+  }
+
+  public function grafico1($idolimpiada){
+    try{
+      $consulta = $this->conexion->prepare("CALL GRAFICO_INTEGRANTES(?)");
+      $consulta->execute(array($idolimpiada));
+      return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    }
+    catch(Exception $e){
+      die($e->getMessage());
+    }
+  }
+
+  public function grafico2($idolimpiada){
+    try{
+      $consulta = $this->conexion->prepare("CALL GRAFICO_MEDALLAS(?)");
+      $consulta->execute(array($idolimpiada));
+      return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    }
+    catch(Exception $e){
+      die($e->getMessage());
+    }
+  }
+  public function reporte1($idolimpiada){
+    try{
+      $consulta = $this->conexion->prepare("CALL REPORTE_INTEGRANTES(?)");
+      $consulta->execute(array($idolimpiada));
+      return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    }
+    catch(Exception $e){
+      die($e->getMessage());
+    }
   }
   
 }
