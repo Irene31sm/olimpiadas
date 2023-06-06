@@ -145,7 +145,7 @@
       </div>
     </div>
     </div>
-
+   
   <script>     
     const agregarintegrante = document.querySelector("#agregarintegrante");
     const participantes = document.querySelector("#participantes");
@@ -341,7 +341,6 @@
     listarDelegaciones(m_delegaciones);
     listarOlimpiadas();
     listarPersonas();
-
     delegacion.addEventListener("change", listarParticipantesEquipo);
     m_btnequipo.addEventListener("click", registrarEquipo);
     registrar_persona.addEventListener("click", registrarPersonas);

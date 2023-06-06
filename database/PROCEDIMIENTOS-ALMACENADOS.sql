@@ -126,7 +126,7 @@ BEGIN
 	WHERE olimpiadas.`idolimpiadas` = _idolimpiada;
 END $$
 
-CALL SPU_FILTRO_DISCIPLINAS_ANUAL(1);
+
 
 -- FILTRO POR DELEGACION Y DISCIPLINA
 DELIMITER $$
@@ -165,7 +165,7 @@ BEGIN
 	INNER JOIN detalle_disciplinas ON detalle_disciplinas.iddetalle = integrantes.iddetalle
 	INNER JOIN olimpiadas ON olimpiadas.idolimpiadas = detalle_disciplinas.idolimpiada
 	INNER JOIN disciplinas ON disciplinas.iddisciplinas = detalle_disciplinas.iddisciplina
-	WHERE equipos.`iddelegacion` = _iddelegacion AND YEAR(olimpiadas.`fechainicio`) LIKE YEAR(NOW()) AND YEAR(NOW()+1);
+	WHERE equipos.`iddelegacion` = 2 AND YEAR(olimpiadas.`fechainicio`) LIKE YEAR(NOW()) AND YEAR(NOW()+1);
 END $$
 
 
@@ -180,7 +180,6 @@ BEGIN
 	WHERE delegaciones.`iddelegacion` = _iddelegacion;
 END $$
 
-CALL SPU_EQUIPOS_PARTCIPANTES(2);
 -- REGISTRAR PERSONA
 DELIMITER $$
 CREATE PROCEDURE SPU_REGISTRAR_PERSONA
@@ -211,7 +210,6 @@ BEGIN
 	INSERT INTO equipos (iddelegacion, idparticipante) VALUES (_iddelegacion,_idparticipante);
 END $$
 
-CALL SPU_REGISTRAR_EQUIPO(11,18);
 
 
 -- REGISTRAR INTEGRANTES
@@ -224,8 +222,6 @@ CREATE PROCEDURE SPU_REGISTRAR_INTEGRANTES
 BEGIN 
 	INSERT INTO integrantes (iddetalle, idequipo) VALUES (_iddetalle,_idequipo);
 END $$
-
-CALL SPU_REGISTRAR_INTEGRANTES(9,21);
 
 -- REGISTAR GANADORES
 DELIMITER $$
@@ -250,7 +246,6 @@ BEGIN
 	INSERT INTO olimpiadas (nombre, fechainicio, fechafin) VALUES (_nombre, _fechainicio, _fechafin);
 END $$
 
-CALL SPU_REGISTRAR_OLIMPIADA('Olimpiada 2025','2025/05/05','2025/06/05');
 
 -- GRAFICOS
 -- CANTIDAD DE PARTICIPANTES REGISTRADOS POR DICIPLINA POR AÑO0

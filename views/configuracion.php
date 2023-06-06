@@ -102,6 +102,8 @@
                 if(datos.status){
                   alert("Registro Guardado Correctamente");
                   document.querySelector("#form-olimpiada").reset();                  
+                }else{
+                    alert("No se pudo guardar");
                 }
               })
               

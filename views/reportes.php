@@ -12,7 +12,6 @@
           </div>
           <div class="col-md-3">
             <select name="olimpiada" id="olimpiada" class="form-select form-select-sm">
-              <option value="">Seleccione</option>
             </select>
           </div>
           <div class="col-md-3">
@@ -30,7 +29,6 @@
               <th>Disciplinas</th>
               <th>Nombres</th>
               <th>Apellidos</th>
-              <th>Olimpiada</th>
             </tr>
           </thead>
           <tbody>
@@ -58,6 +56,7 @@
             optionTag.value = element.idolimpiadas;
             optionTag.text = element.fecha;
             olimpiada.appendChild(optionTag);
+            olimpiada.focus();
           });
         })
       }
@@ -80,8 +79,7 @@
               <td>${element.delegacion}</td>
               <td>${element.disciplina}</td>
               <td>${element.nombres}</td>
-              <td>${element.apellidos}</td>
-              <td>${element.fecha}</td>           
+              <td>${element.apellidos}</td>     
             </tr>
             `;
             body.innerHTML += fila;
@@ -96,8 +94,8 @@
         parametros.append("titulo", olimpiada.options[olimpiada.selectedIndex].text);
         window.open(`../reports/olimpiadas.report.php?${parametros}`, '_blank');
       }
-      
+    
     reporte.addEventListener("click",generarpdf);
-    olimpiada.addEventListener("change", listar);
+    olimpiada.addEventListener("focus", listar);
     listarOlimpiadas();
 </script>

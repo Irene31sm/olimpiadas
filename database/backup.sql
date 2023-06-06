@@ -193,31 +193,33 @@ CREATE TABLE `ganadores` (
   `puesto` char(1) NOT NULL,
   PRIMARY KEY (`idganador`),
   UNIQUE KEY `uk_ganador_gana` (`idintegrante`,`puesto`),
+  UNIQUE KEY `uk_puesto_gana` (`idintegrante`),
   CONSTRAINT `fk_integrante_gana` FOREIGN KEY (`idintegrante`) REFERENCES `integrantes` (`idintegrantes`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `ganadores` */
 
 insert  into `ganadores`(`idganador`,`idintegrante`,`puesto`) values 
-(3,1,'1'),
-(10,3,'2'),
-(12,5,'1'),
-(4,7,'2'),
-(11,9,'3'),
-(20,12,'3'),
-(13,17,'2'),
-(6,20,'1'),
-(14,23,'3'),
-(17,28,'3'),
-(18,30,'1'),
-(7,32,'2'),
-(9,33,'1'),
-(19,36,'2'),
-(15,40,'1'),
-(8,44,'3'),
-(5,49,'3'),
-(16,52,'2'),
-(1,55,'1');
+(1,1,'1'),
+(8,3,'2'),
+(10,5,'1'),
+(2,7,'2'),
+(9,9,'3'),
+(18,12,'3'),
+(11,17,'2'),
+(4,20,'1'),
+(12,23,'3'),
+(15,28,'3'),
+(16,30,'1'),
+(5,32,'2'),
+(7,33,'1'),
+(17,36,'2'),
+(13,40,'1'),
+(6,44,'3'),
+(3,49,'3'),
+(14,52,'2'),
+(19,55,'1'),
+(20,62,'1');
 
 /*Table structure for table `integrantes` */
 
@@ -362,18 +364,18 @@ DROP TABLE IF EXISTS `olimpiadas`;
 CREATE TABLE `olimpiadas` (
   `idolimpiadas` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(60) NOT NULL,
-  `fechainicio` datetime NOT NULL,
-  `fechafin` datetime DEFAULT NULL,
+  `fechainicio` date NOT NULL,
+  `fechafin` date DEFAULT NULL,
   PRIMARY KEY (`idolimpiadas`),
-  UNIQUE KEY `uk_nombre_oli` (`nombre`)
+  UNIQUE KEY `uk_nombre_oli` (`nombre`,`fechainicio`,`fechafin`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `olimpiadas` */
 
 insert  into `olimpiadas`(`idolimpiadas`,`nombre`,`fechainicio`,`fechafin`) values 
-(1,'OLIMPIADAS DISTRITALES 2022','2022-06-15 00:00:00','2022-06-30 00:00:00'),
-(2,'OLIMPIADAS DISTRITALES 2023','2023-06-12 00:00:00',NULL),
-(3,'OLIMPIADAS DISTRITALES 2024','2024-07-15 00:00:00',NULL);
+(1,'OLIMPIADAS DISTRITALES 2022','2022-06-15','2022-06-30'),
+(2,'OLIMPIADAS DISTRITALES 2023','2023-06-12',NULL),
+(3,'OLIMPIADAS DISTRITALES 2024','2024-07-15',NULL);
 
 /*Table structure for table `personas` */
 
@@ -494,8 +496,8 @@ CREATE TABLE `usuarios` (
 /*Data for the table `usuarios` */
 
 insert  into `usuarios`(`idusuario`,`idpersona`,`usuario`,`clave`,`nivelacceso`,`estado`,`create_at`,`update_at`) values 
-(1,1,'irene31','$2y$10$XAuSPSjRRCQRvdpMDbvMz.tA8U3jo7XF3IF1vuGYITv/ROFj9g0Kq','ADM','1','2023-06-04 17:58:53',NULL),
-(2,2,'kiara07','$2y$10$6l64SgQiLw/JChl5/LZLpunseifu/zLQYgYUeNkW.JGDgrleyAiwu','EDT','1','2023-06-04 17:58:53',NULL);
+(1,1,'irene31','$2y$10$XAuSPSjRRCQRvdpMDbvMz.tA8U3jo7XF3IF1vuGYITv/ROFj9g0Kq','ADM','1','2023-06-06 15:54:38',NULL),
+(2,2,'kiara07','$2y$10$6l64SgQiLw/JChl5/LZLpunseifu/zLQYgYUeNkW.JGDgrleyAiwu','EDT','1','2023-06-06 15:54:38',NULL);
 
 /* Procedure structure for procedure `GRAFICO_INTEGRANTES` */
 
@@ -598,11 +600,11 @@ DELIMITER ;
 
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SPU_BUSCAR_DISCIPLINA`(in _iddisciplina int)
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SPU_BUSCAR_DISCIPLINA`(IN _iddisciplina INT)
 BEGIN
-	select iddisciplinas, disciplina
-	from disciplinas
-	where iddisciplinas = _iddisciplina;
+	SELECT iddisciplinas, disciplina
+	FROM disciplinas
+	WHERE iddisciplinas = _iddisciplina;
 END */$$
 DELIMITER ;
 
@@ -613,11 +615,11 @@ DELIMITER ;
 DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SPU_EDITAR_DISCIPLINA`(
-in _iddisciplina int,
-IN _disciplina varchar(40)
+IN _iddisciplina INT,
+IN _disciplina VARCHAR(40)
 )
 BEGIN
-	update disciplinas set disciplina = _disciplina where iddisciplinas = _iddisciplina;
+	UPDATE disciplinas SET disciplina = _disciplina WHERE iddisciplinas = _iddisciplina;
 END */$$
 DELIMITER ;
 
@@ -879,9 +881,9 @@ DELIMITER ;
 DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SPU_REGISTRAR_OLIMPIADA`(
-	IN _nombre varchar(60),
-	IN _fechainicio date,
-	in _fechafin date
+	IN _nombre VARCHAR(60),
+	IN _fechainicio DATE,
+	IN _fechafin DATE
 )
 BEGIN 
 	INSERT INTO olimpiadas (nombre, fechainicio, fechafin) VALUES (_nombre, _fechainicio, _fechafin);

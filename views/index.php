@@ -14,7 +14,6 @@ if (!isset($_SESSION['login']) || !$_SESSION['login']['acceso']){
   <!-- <link rel="shortcut icon" type="image/png" href="images/logos/" /> -->
   <link rel="stylesheet" href="css/styles.min.css" />
 </head>
-
 <body>
   <!--  Body Wrapper -->
   <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"

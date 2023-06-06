@@ -35,10 +35,10 @@ CREATE TABLE usuarios
 CREATE TABLE olimpiadas
 (
 	idolimpiadas			INT AUTO_INCREMENT PRIMARY KEY,
-	nombre					VARCHAR(60)	NOT NULL,
-	fechainicio				DATE 	NOT NULL,
-	fechafin					DATE 	NULL,
-	CONSTRAINT uk_nombre_oli UNIQUE (nombre)
+	nombre				VARCHAR(60)	NOT NULL,
+	fechainicio			DATE 	NOT NULL,
+	fechafin			DATE 	NULL,
+	CONSTRAINT uk_nombre_oli UNIQUE (nombre,fechainicio, fechafin)
 )ENGINE = INNODB;
 
 SELECT * FROM olimpiadas;
@@ -97,8 +97,9 @@ CREATE TABLE integrantes
 CREATE TABLE ganadores
 (
 	idganador 		INT AUTO_INCREMENT PRIMARY KEY,
-	idintegrante	INT NOT NULL,
+	idintegrante		INT NOT NULL,
 	puesto			CHAR(1)	NOT NULL, -- 1 = primer puesto, 2 segundo puesto, 3 tercer puesto,
 	CONSTRAINT fk_integrante_gana FOREIGN KEY (idintegrante) REFERENCES integrantes(idintegrantes),
-	CONSTRAINT uk_ganador_gana UNIQUE (idintegrante,puesto)
+	CONSTRAINT uk_ganador_gana UNIQUE (idintegrante,puesto),
+	CONSTRAINT uk_puesto_gana UNIQUE (idintegrante)
 )ENGINE = INNODB;
